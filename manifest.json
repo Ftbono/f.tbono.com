@@ -1,0 +1,16 @@
+{"dir" : "ltr",
+    "lang" : "pt-br",
+    "name" : "Ftbono",
+    "scope" : ".",
+    "display" : "browser",
+    "start_url" : "https://f.tbono.com",
+    "short_name" : "Ftbono",
+    "theme_color" : "transparent",
+    "description" : "",
+    "orientation" : "any",
+    "background_color" : "transparent",
+    "related_applications" : "",
+    "prefer_related_applications" : "false",
+    "generated" : "true",
+    "icons" : [
+    ]}

@@ -1,0 +1,106 @@
+<?php
+
+header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
+
+?>
+
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="visual.css">
+        <title>Ftbono</title>
+
+        </head>
+
+        <body>
+
+        <div class="header">
+            
+            <a href="index.php" class="logo">Ftbono</a>
+
+        <div class="header-right">
+    
+            <a class="active" href="index.php">Início</a>
+  
+            <a href="/contato.php">Contato</a>
+    
+            <a href="#about">Sobre</a>
+        
+        </div>
+        </div>
+
+        <div style="padding-left:20px">
+
+            <h1>Linux Containers (LXC)</h1>
+
+            <h2>Guia Rápido</h2>
+    
+             <p>1- lxc-create -n container -t download<br><br>
+                
+                2- vim /var/lib/lxc/container/config<br>
+<b> lxc.network.type = veth<br>
+    lxc.network.link = br0<br>
+    lxc.network.flags = up<br>
+    lxc.network.hwaddr = 00:16:3e:7d:ab:06<br>
+    lxc.rootfs = /var/lib/lxc/container/rootfs<br>
+    lxc.rootfs.backend = dir<br>
+    lxc.include = /usr/share/lxc/config/debian.common.conf<br>
+    lxc.tty = 4<br>
+    lxc.utsname = container<br>
+    lxc.arch = amd64 </b><br><br>
+
+                3- chroot /var/lib/lxc/container/rootfs passwd<br><br>
+
+                4- lxc-start -n container<br><br>
+
+                5- lxc-console -n container<br><br>
+
+                6- vim /etc/network/interfaces<br>
+<b> auto lo<br>
+    iface lo inet loopback<br>
+    auto eth0<br>
+    iface eth0 inet static<br>
+        address 192.168.2.45<br>
+        netmask 255.255.255.0<br>
+        network 192.168.2.0<br>
+        broadcast 192.168.2.255<br>
+        gateway 192.168.2.20</b><br><br>
+
+                7- vim /etc/resolv.conf<br>
+<b> nameserver 8.8.8.8<br>
+    nameserver 8.8.4.4</b><br><br>
+
+                8- apt-get install apache2 libapache2-mod-php7.0 php7.0 mysql-server iputils-ping -y<br><br>
+
+                9- dpkg -l | grep dhcp<br><br>
+
+               10- apt-get remove --purge isc-dhcp-client<br><br>
+
+        <h2>Testando</h2>
+  
+        <p>     1- ifconfig<br><b>
+
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500<br>
+        inet 192.168.2.42  netmask 255.255.255.0  broadcast 192.168.2.255<br>
+        inet6 fe80::216:3eff:fe82:6380  prefixlen 64  scopeid 0x20<link><br>
+        ether 00:16:3e:82:63:80  txqueuelen 1000  (Ethernet)<br>
+        RX packets 2381  bytes 226589 (221.2 KiB)<br>
+        RX errors 0  dropped 6  overruns 0  frame 0<br>
+        TX packets 394  bytes 30770 (30.0 KiB)<br>
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0<br><br>
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536<br>
+        inet 127.0.0.1  netmask 255.0.0.0<br>
+        inet6 ::1  prefixlen 128  scopeid 0x10<host><br>
+        loop  txqueuelen 1  (Local Loopback)<br>
+        RX packets 6  bytes 534 (534.0 B)<br>
+        RX errors 0  dropped 0  overruns 0  frame 0<br>
+        TX packets 6  bytes 534 (534.0 B)<br>
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</b><br>
+
+     
+        </div>
+
+</body>
+</html>        
